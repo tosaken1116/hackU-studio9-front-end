@@ -1,6 +1,6 @@
 import { Box, Paper, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
-import { DemandRowType } from "../Demand/type";
+import { DemandRowType } from "../../../Type/type";
 
 export default function CommentRow({
     createdAt,

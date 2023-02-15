@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
+import { LayoutProps } from "../../../Type/type";
 import Header from "../Header/Header";
-import { LayoutProps } from "./type";
 
 export default function Layout({ children }: LayoutProps) {
     return (

@@ -3,8 +3,8 @@ import ViewKanbanIcon from "@mui/icons-material/ViewKanban";
 import { Box, Button, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useState } from "react";
+import { DemandRowType } from "../../../Type/type";
 import ProfilePopOver from "../Profile/ProfilePopOver";
-import { DemandRowType } from "./type";
 
 export default function DemandRow({
     createdAt,
