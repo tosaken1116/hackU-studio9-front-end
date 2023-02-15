@@ -2,7 +2,9 @@ import { Button } from '@mui/material'
 import React, { useState } from 'react'
 import Modal from 'react-modal'
 
+
 export default function home() {
+
   return (
     <div>
       <h1>username</h1>
@@ -10,7 +12,7 @@ export default function home() {
         業務一覧
         <p>業務1</p>
       </h1>
-      <Button href='./directmessage'>DM</Button>
+      <Button href='./DM/directmessage'>DM</Button>
     </div>
   )
 }
