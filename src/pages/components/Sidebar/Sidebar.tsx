@@ -38,8 +38,8 @@ export default function Sidebar() {
                         }}
                     >
                         <Grid item>
-                            <Link href="Home">
-                                {router.pathname == "/Home" ? (
+                            <Link href="/">
+                                {router.pathname == "/" ? (
                                     <HomeIcon />
                                 ) : (
                                     <HomeOutlinedIcon />
