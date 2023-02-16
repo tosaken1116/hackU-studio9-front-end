@@ -157,7 +157,7 @@ export default function TopPage() {
         <Box>
             <Stack direction="row">
                 <DemandsWrapper
-                    maxHeight="85vh"
+                    maxHeight={matches ? "85vh" : "74vh"}
                     demands={demodata}
                 ></DemandsWrapper>
                 {matches && <DemandDetail />}
