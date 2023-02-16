@@ -1,4 +1,4 @@
-import { Box, Divider, Stack, useMediaQuery } from "@mui/material";
+import { Divider, List, ListItem, Stack, useMediaQuery } from "@mui/material";
 import DemandRow from "./DemandRow";
 
 export default function Demands() {
@@ -152,12 +152,14 @@ export default function Demands() {
     ];
     return (
         <Stack sx={{ width: matches ? "50%" : "100%" }}>
-            {demodata.map((demand, index) => (
-                <Box key={index}>
-                    <DemandRow {...demand}></DemandRow>
-                    <Divider></Divider>
-                </Box>
-            ))}
+            <List sx={{ overflow: "auto", maxHeight: "85vh" }}>
+                {demodata.map((demand, index) => (
+                    <ListItem key={index}>
+                        <DemandRow {...demand}></DemandRow>
+                        <Divider></Divider>
+                    </ListItem>
+                ))}
+            </List>
         </Stack>
     );
 }
