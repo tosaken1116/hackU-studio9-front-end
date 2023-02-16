@@ -3,10 +3,12 @@ import { Button, Divider, ListItem, Stack, useMediaQuery } from "@mui/material";
 import { userAgent } from "next/server";
 import { useState } from "react";
 import DemandRow from "../components/Demand/DemandRow";
+import { useDirectMessageProps } from "../Hooks/hooks";
 
-function messagelist() {
+function MessageList() {
     const matches: boolean = useMediaQuery("(min-width:1000px)");
     const [user, setUsername] = useState("");
+    const {setDirectMessageProps}=useDirectMessageProps()
     const demouser = [
         {
             username: "example1"
@@ -33,11 +35,11 @@ function messagelist() {
 
     return (
         <Stack sx={{ width: matches ? "50%" : "100%" }}>
-            {demouser.map((user, index) => (
-                     <Button style={{textAlign: "center"}} onChange={(e) => handleSubmit(e)} value={user.username}>{user.username}</Button>
+            {demouser.map(({username}, index) => (
+                     <Button key = {index} style={{textAlign: "center"}} onClick={()=>setDirectMessageProps({DirectMessageId:username})} value={username}>{username}</Button>
             ))}
         </Stack>
     );
 }
 
-export default messagelist;
+export default MessageList;
