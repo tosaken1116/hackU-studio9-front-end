@@ -1,15 +1,19 @@
-import { SendAndArchiveTwoTone } from "@mui/icons-material";
 import { Box, Button, TextField, useMediaQuery } from "@mui/material";
 import { Stack } from "@mui/system";
 import { __InputValue } from "graphql";
-import { sendError } from "next/dist/server/api-utils";
-import { useRouter } from "next/router";
 import React, { useState } from "react";
-
-function message() {
+import { useDirectMessage } from "../Hooks/hooks";
+import MessageBox from "./MessageBox";
+type MessageProps = {
+        inputValue: string;
+        sendAt: Date;
+        sender: string;
+}
+function PersonalMessage() {
         const matches: boolean = useMediaQuery("(min-width:1000px)");
         const [InputValue, setInputValue] = useState("");
-        const [messages, setMessage] = useState<message[]>([]);
+        const [messages, setMessage] = useState<MessageProps[]>([]);
+        const {message}=useDirectMessage()
 /*         const demomessage = [
                 {
                         message: "お願いします",
@@ -33,11 +37,7 @@ function message() {
                 },
         ] */
 
-        type message = {
-                inputValue: string;
-                sendAt: Date;
-                sender: string;
-        }
+        
 
         const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
                 console.log(e.target.value);
@@ -48,7 +48,7 @@ function message() {
                 e.preventDefault();
 
                 const date = new Date();
-                const newMessage: message = {
+                const newMessage: MessageProps = {
                         inputValue: InputValue,
                         sendAt: date,
                         sender: "me", 
@@ -60,19 +60,19 @@ function message() {
         return (
                 <Stack sx={{width: matches ? "50%" : "100%"}} style={{textAlign: "center"}}>
                         <Box>
-                        {messages.map((text) => (
-                                <a>{text.inputValue}</a>
-                        ))}     
+                        <MessageBox messages={message}/>
                         </Box>
-
+                        <Box>
                         <form onSubmit={(e) => handleSubmit(e)}>
-                                <TextField type="text" onChange={(e:React.ChangeEvent<HTMLInputElement>) => handleChange(e)}></TextField>
+                                {/* <TextField type="text" onChange={(e:React.ChangeEvent<HTMLInputElement>) => handleChange(e)}></TextField> */}
+                                <TextField type="text" value={InputValue}></TextField>
                                 <Button type="submit">送信</Button>
                         </form>
+                        </Box>
                 </Stack>
         ) 
 
 };
 
 
-export default message;
+export default PersonalMessage;

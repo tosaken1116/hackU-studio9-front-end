@@ -1,6 +1,6 @@
 import { Box, Divider, Grid, Stack } from "@mui/material";
 import Messagelist from "./messagelist";
-import Message from "./[userid]";
+import Message from "./PersonalMessage";
 
 function dm() {
     return (
