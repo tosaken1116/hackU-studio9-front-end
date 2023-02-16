@@ -8,7 +8,7 @@ export default function Header() {
     const { data: session, status } = useSession();
 
     return (
-        <Paper>
+        <Paper sx={{ height: "15vh" }}>
             <Stack direction="row" p={2} sx={{ position: "static" }}>
                 <Typography variant="h3">サービス名</Typography>
                 <Box flexGrow={1}></Box>

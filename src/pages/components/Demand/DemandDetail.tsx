@@ -13,7 +13,7 @@ export default function DemandDetail() {
         caption: "test caption",
     };
     return (
-        <Box flexGrow={1} p={2}>
+        <Box flexGrow={1} p={2} sx={{ overflow: "auto", maxHeight: "85vh" }}>
             <Stack p={2} spacing={2}>
                 <Paper>
                     <Stack p={3} spacing={2}>
