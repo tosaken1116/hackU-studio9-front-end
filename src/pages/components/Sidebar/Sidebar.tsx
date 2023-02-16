@@ -57,8 +57,8 @@ export default function Sidebar() {
                         </Grid>
 
                         <Grid item>
-                            <Link href="/DirectMessage/messagelist">
-                                {router.pathname == "/DirectMessage/messagelist" ? (
+                            <Link href="/DirectMessage/dm">
+                                {router.pathname == "/DirectMessage/dm" ? (
                                     <EmailIcon />
                                 ) : (
                                     <EmailOutlinedIcon />
