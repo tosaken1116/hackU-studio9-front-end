@@ -1,6 +1,9 @@
+import { useMediaQuery } from "@mui/material";
 import DemandsWrapper from "../Demand/Demands";
 
 export default function SearchResult() {
+    const matches: boolean = useMediaQuery("(min-width:1000px)");
+
     const demodata = [
         {
             title: "testtitle",
@@ -148,6 +151,9 @@ export default function SearchResult() {
         },
     ];
     return (
-        <DemandsWrapper maxHeight="65vh" demands={demodata}></DemandsWrapper>
+        <DemandsWrapper
+            maxHeight={matches ? "65vh" : "54vh"}
+            demands={demodata}
+        ></DemandsWrapper>
     );
 }
