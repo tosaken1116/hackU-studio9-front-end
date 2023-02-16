@@ -2,6 +2,8 @@ import EmailIcon from "@mui/icons-material/Email";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import HomeIcon from "@mui/icons-material/Home";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import PersonIcon from "@mui/icons-material/Person";
 import SearchIcon from "@mui/icons-material/Search";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { Box, Grid, Paper, Slide } from "@mui/material";
@@ -37,7 +39,7 @@ export default function Sidebar() {
                             height: "85vh",
                         }}
                     >
-                        <Grid item>
+                        <Grid item xs={8}>
                             <Link href="/">
                                 {router.pathname == "/" ? (
                                     <HomeIcon />
@@ -46,7 +48,7 @@ export default function Sidebar() {
                                 )}
                             </Link>
                         </Grid>
-                        <Grid item>
+                        <Grid item xs={8}>
                             <Link href="Search">
                                 {router.pathname == "/Search" ? (
                                     <SearchIcon />
@@ -55,8 +57,16 @@ export default function Sidebar() {
                                 )}
                             </Link>
                         </Grid>
-
-                        <Grid item>
+                        <Grid item xs={8}>
+                            <Link href="/Profile/my">
+                                {router.pathname == "/Profile/[userId]" ? (
+                                    <PersonIcon />
+                                ) : (
+                                    <PermIdentityIcon />
+                                )}
+                            </Link>
+                        </Grid>
+                        <Grid item xs={8}>
                             <Link href="/DirectMessage">
                                 {router.pathname == "/DirectMessage" ? (
                                     <EmailIcon />
