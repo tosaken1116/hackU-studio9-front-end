@@ -11,7 +11,6 @@ export default function Header() {
         <Paper sx={{ height: "15vh" }}>
             <Stack direction="row" p={2} sx={{ position: "static" }}>
                 <Typography variant="h3">サービス名</Typography>
-                <Button href="Directmessage/messagelist">dm</Button>
                 <Box flexGrow={1}></Box>
                 {status === "authenticated" ? (
                     <Stack>
