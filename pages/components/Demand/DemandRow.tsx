@@ -1,7 +1,9 @@
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ViewKanbanIcon from "@mui/icons-material/ViewKanban";
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
+import { useState } from "react";
+import ProfilePopOver from "../Profile/ProfilePopOver";
 import { DemandRowType } from "./type";
 
 export default function DemandRow({
@@ -12,12 +14,25 @@ export default function DemandRow({
     viewNumber,
     status,
 }: DemandRowType) {
+    const [anchorElement, setAnchorElement] =
+        useState<HTMLButtonElement | null>(null);
+    const handleOpenProfilePopOver = (
+        event: React.MouseEvent<HTMLButtonElement>
+    ) => {
+        setAnchorElement(event.currentTarget);
+    };
     return (
         <Stack p={2}>
             <Stack direction="row">
                 <Typography variant="h5">{title}</Typography>
                 <Box flexGrow={1}></Box>
-                <Typography>質問者:{author}</Typography>
+                <Button onClick={handleOpenProfilePopOver}>
+                    <Typography>質問者:{author}</Typography>
+                </Button>
+                <ProfilePopOver
+                    anchorElement={anchorElement}
+                    closePopOver={() => setAnchorElement(null)}
+                />
             </Stack>
             <Stack direction="row" spacing={2}>
                 <Typography
