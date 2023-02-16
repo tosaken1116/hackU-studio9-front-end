@@ -7,6 +7,7 @@ import DemandsWrapper from "./components/Demand/Demands";
 export default function TopPage() {
     const matches: boolean = useMediaQuery("(min-width:1000px)");
     const [isModalOpen, setIsModalOpen] = useState(false);
+
     const demodata = [
         {
             title: "testtitle",
