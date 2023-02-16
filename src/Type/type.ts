@@ -1,3 +1,6 @@
+export type LayoutProps = {
+    children: React.ReactNode;
+};
 export type DemandRowType = {
     createdAt: string;
     caption: string;
@@ -11,4 +14,8 @@ export type DemandRowType = {
 export type DemandDetailModalProps = {
     isModalOpen: boolean;
     modalClose: () => void;
+};
+export type ProfilePopOverProps = {
+    closePopOver: () => void;
+    anchorElement: HTMLButtonElement | null;
 };
