@@ -7,7 +7,7 @@ const Demands = ({ maxHeight, demands }: DemandsType) => {
     return (
         <Stack sx={{ width: matches ? "50%" : "100%" }}>
             <List sx={{ overflow: "auto", maxHeight: maxHeight }}>
-                {demands.map((demand, index) => (
+                {demands?.map((demand, index) => (
                     <ListItem key={index}>
                         <DemandRow {...demand}></DemandRow>
                         <Divider></Divider>
