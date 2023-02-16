@@ -1,12 +1,6 @@
-import { Box, Stack, useMediaQuery } from "@mui/material";
-import { useState } from "react";
-import DemandDetail from "./components/Demand/DemandDetail";
-import DemandDetailModal from "./components/Demand/DemandDetailModal";
-import DemandsWrapper from "./components/Demand/Demands";
+import DemandsWrapper from "../Demand/Demands";
 
-export default function TopPage() {
-    const matches: boolean = useMediaQuery("(min-width:1000px)");
-    const [isModalOpen, setIsModalOpen] = useState(false);
+export default function SearchResult() {
     const demodata = [
         {
             title: "testtitle",
@@ -154,18 +148,6 @@ export default function TopPage() {
         },
     ];
     return (
-        <Box>
-            <Stack direction="row">
-                <DemandsWrapper
-                    maxHeight="85vh"
-                    demands={demodata}
-                ></DemandsWrapper>
-                {matches && <DemandDetail />}
-            </Stack>
-            <DemandDetailModal
-                isModalOpen={isModalOpen}
-                modalClose={() => setIsModalOpen(false)}
-            />
-        </Box>
+        <DemandsWrapper maxHeight="65vh" demands={demodata}></DemandsWrapper>
     );
 }

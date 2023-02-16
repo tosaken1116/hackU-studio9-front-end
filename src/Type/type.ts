@@ -19,3 +19,8 @@ export type ProfilePopOverProps = {
     closePopOver: () => void;
     anchorElement: HTMLButtonElement | null;
 };
+export type DemandsType = {
+    maxHeight: string
+    demands: DemandRowType[]
+
+}

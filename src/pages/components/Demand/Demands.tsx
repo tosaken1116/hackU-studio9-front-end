@@ -1,159 +1,13 @@
 import { Divider, List, ListItem, Stack, useMediaQuery } from "@mui/material";
+import { DemandsType } from "../../../Type/type";
 import DemandRow from "./DemandRow";
 
-export default function Demands() {
+const Demands = ({ maxHeight, demands }: DemandsType) => {
     const matches: boolean = useMediaQuery("(min-width:1000px)");
-
-    const demodata = [
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "unResolved",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "resolved",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-    ];
     return (
         <Stack sx={{ width: matches ? "50%" : "100%" }}>
-            <List sx={{ overflow: "auto", maxHeight: "85vh" }}>
-                {demodata.map((demand, index) => (
+            <List sx={{ overflow: "auto", maxHeight: maxHeight }}>
+                {demands?.map((demand, index) => (
                     <ListItem key={index}>
                         <DemandRow {...demand}></DemandRow>
                         <Divider></Divider>
@@ -162,4 +16,8 @@ export default function Demands() {
             </List>
         </Stack>
     );
+};
+
+export default function DemandsWrapper(demandsProps: DemandsType) {
+    return <Demands {...demandsProps}></Demands>;
 }
