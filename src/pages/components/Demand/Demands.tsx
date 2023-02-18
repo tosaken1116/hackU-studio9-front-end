@@ -5,7 +5,7 @@ import DemandRow from "./DemandRow";
 const Demands = ({ maxHeight, demands, openModal }: DemandsType) => {
     const matches: boolean = useMediaQuery("(min-width:1000px)");
     return (
-        <Stack sx={{ width: matches ? "50%" : "100%" }}>
+        <Stack sx={{ width: "100%" }}>
             <List sx={{ overflow: "auto", maxHeight: maxHeight }}>
                 {demands?.map((demand, index) => (
                     <ListItem key={index}>

@@ -28,3 +28,9 @@ export type DemandsType = {
 export type ideaIdProps = {
     ideaId: string
 }
+export type SearchWordProps = {
+    searchWord: string;
+};
+export type SearchResultProps = {
+    openModal:()=>void
+}

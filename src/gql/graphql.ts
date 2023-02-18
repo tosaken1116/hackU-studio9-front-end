@@ -15,6 +15,7 @@ export type Scalars = {
   Status: any;
   timestamp: any;
   timestamptz: any;
+  uuid: any;
 };
 
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
@@ -35,7 +36,7 @@ export type Comment = {
   __typename?: 'Comment';
   UserEmail: Scalars['String'];
   createdAt: Scalars['timestamp'];
-  id: Scalars['String'];
+  id: Scalars['uuid'];
   ideaID: Scalars['String'];
   message?: Maybe<Scalars['String']>;
   updatedAt: Scalars['timestamp'];
@@ -70,7 +71,7 @@ export type Comment_Bool_Exp = {
   _not?: InputMaybe<Comment_Bool_Exp>;
   _or?: InputMaybe<Array<Comment_Bool_Exp>>;
   createdAt?: InputMaybe<Timestamp_Comparison_Exp>;
-  id?: InputMaybe<String_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
   ideaID?: InputMaybe<String_Comparison_Exp>;
   message?: InputMaybe<String_Comparison_Exp>;
   updatedAt?: InputMaybe<Timestamp_Comparison_Exp>;
@@ -79,6 +80,8 @@ export type Comment_Bool_Exp = {
 /** unique or primary key constraints on table "Comment" */
 export enum Comment_Constraint {
   /** unique or primary key constraint on columns "id" */
+  CommentIdKey = 'Comment_id_key',
+  /** unique or primary key constraint on columns "id" */
   CommentPkey = 'Comment_pkey'
 }
 
@@ -86,7 +89,7 @@ export enum Comment_Constraint {
 export type Comment_Insert_Input = {
   UserEmail?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['timestamp']>;
-  id?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
   ideaID?: InputMaybe<Scalars['String']>;
   message?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['timestamp']>;
@@ -97,7 +100,7 @@ export type Comment_Max_Fields = {
   __typename?: 'Comment_max_fields';
   UserEmail?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['timestamp']>;
-  id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
   ideaID?: Maybe<Scalars['String']>;
   message?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamp']>;
@@ -108,7 +111,7 @@ export type Comment_Min_Fields = {
   __typename?: 'Comment_min_fields';
   UserEmail?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['timestamp']>;
-  id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
   ideaID?: Maybe<Scalars['String']>;
   message?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamp']>;
@@ -142,7 +145,7 @@ export type Comment_Order_By = {
 
 /** primary key columns input for table: Comment */
 export type Comment_Pk_Columns_Input = {
-  id: Scalars['String'];
+  id: Scalars['uuid'];
 };
 
 /** select columns of table "Comment" */
@@ -165,7 +168,7 @@ export enum Comment_Select_Column {
 export type Comment_Set_Input = {
   UserEmail?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['timestamp']>;
-  id?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
   ideaID?: InputMaybe<Scalars['String']>;
   message?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['timestamp']>;
@@ -183,7 +186,7 @@ export type Comment_Stream_Cursor_Input = {
 export type Comment_Stream_Cursor_Value_Input = {
   UserEmail?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['timestamp']>;
-  id?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
   ideaID?: InputMaybe<Scalars['String']>;
   message?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['timestamp']>;
@@ -308,6 +311,8 @@ export type Idea_Bool_Exp = {
 
 /** unique or primary key constraints on table "Idea" */
 export enum Idea_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  IdeaIdKey = 'Idea_id_key',
   /** unique or primary key constraint on columns "lineID" */
   IdeaLineIdKey = 'Idea_lineID_key',
   /** unique or primary key constraint on columns "id" */
@@ -1505,7 +1510,7 @@ export type Mutation_RootDelete_CommentArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Comment_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['uuid'];
 };
 
 
@@ -1853,7 +1858,7 @@ export type Query_RootComment_AggregateArgs = {
 
 
 export type Query_RootComment_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['uuid'];
 };
 
 
@@ -2044,7 +2049,7 @@ export type Subscription_RootComment_AggregateArgs = {
 
 
 export type Subscription_RootComment_By_PkArgs = {
-  id: Scalars['String'];
+  id: Scalars['uuid'];
 };
 
 
@@ -2231,6 +2236,19 @@ export type Timestamptz_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['timestamptz']>>;
 };
 
+/** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
+export type Uuid_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['uuid']>;
+  _gt?: InputMaybe<Scalars['uuid']>;
+  _gte?: InputMaybe<Scalars['uuid']>;
+  _in?: InputMaybe<Array<Scalars['uuid']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['uuid']>;
+  _lte?: InputMaybe<Scalars['uuid']>;
+  _neq?: InputMaybe<Scalars['uuid']>;
+  _nin?: InputMaybe<Array<Scalars['uuid']>>;
+};
+
 export type GetHomeDemandsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2243,6 +2261,14 @@ export type GetDemandDetailQueryVariables = Exact<{
 
 export type GetDemandDetailQuery = { __typename?: 'query_root', Idea: Array<{ __typename?: 'Idea', author?: string | null, caption: string, createdAt: any, title: string, status: any, views: number }> };
 
+export type GetSearchResultQueryVariables = Exact<{
+  searchWord: Scalars['String'];
+}>;
+
+
+export type GetSearchResultQuery = { __typename?: 'query_root', Idea: Array<{ __typename?: 'Idea', views: number, updatedAt?: any | null, title: string, status: any, id: string, createdAt: any, author?: string | null }> };
+
 
 export const GetHomeDemandsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getHomeDemands"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Idea"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"20"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"views"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<GetHomeDemandsQuery, GetHomeDemandsQueryVariables>;
 export const GetDemandDetailDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getDemandDetail"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"ideaId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Idea"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"ideaId"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"}},{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"views"}}]}}]}}]} as unknown as DocumentNode<GetDemandDetailQuery, GetDemandDetailQueryVariables>;
+export const GetSearchResultDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getSearchResult"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"searchWord"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Idea"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_nilike"},"value":{"kind":"Variable","name":{"kind":"Name","value":"searchWord"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"views"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"author"}}]}}]}}]} as unknown as DocumentNode<GetSearchResultQuery, GetSearchResultQueryVariables>;
