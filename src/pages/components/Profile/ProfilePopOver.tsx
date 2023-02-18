@@ -1,11 +1,11 @@
 import { Paper, Popover, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import { ProfilePopOverProps } from "../../../Type/type";
+import { PopOverProps } from "../../../Type/type";
 
 export default function ProfilePopOver({
     anchorElement,
     closePopOver,
-}: ProfilePopOverProps) {
+}: PopOverProps) {
     const userData = {
         userName: "test",
         resolveNumber: 1,
