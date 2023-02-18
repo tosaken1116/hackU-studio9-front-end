@@ -1,6 +1,5 @@
 
 import type { CodegenConfig } from '@graphql-codegen/cli';
-console.log(process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ADMIN_SECRET)
 const config: CodegenConfig = {
   overwrite: true,
   schema: [
@@ -14,7 +13,7 @@ const config: CodegenConfig = {
         },
     },
 ],
-  documents: "src/**/*.tsx",
+  documents: ["src/**/*.ts","src/**/*.tsx"],
   generates: {
     "src/gql/": {
       preset: "client",

@@ -13,7 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
-    "\n        query test {\n            User {\n                name\n            }\n        }\n    ": types.TestDocument,
+    "\n    query getHomeDemands {\n        Idea(limit: 20) {\n            author\n            title\n            status\n            createdAt\n            views\n            id\n        }\n    }\n": types.GetHomeDemandsDocument,
+    "\nquery getDemandDetail($ideaId: String!){\n  Idea(where: {id: {_eq: $ideaId}}) {\n    author\n    caption\n    createdAt\n    title\n    status\n    views\n  }\n}": types.GetDemandDetailDocument,
 };
 
 /**
@@ -33,7 +34,11 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n        query test {\n            User {\n                name\n            }\n        }\n    "): (typeof documents)["\n        query test {\n            User {\n                name\n            }\n        }\n    "];
+export function graphql(source: "\n    query getHomeDemands {\n        Idea(limit: 20) {\n            author\n            title\n            status\n            createdAt\n            views\n            id\n        }\n    }\n"): (typeof documents)["\n    query getHomeDemands {\n        Idea(limit: 20) {\n            author\n            title\n            status\n            createdAt\n            views\n            id\n        }\n    }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\nquery getDemandDetail($ideaId: String!){\n  Idea(where: {id: {_eq: $ideaId}}) {\n    author\n    caption\n    createdAt\n    title\n    status\n    views\n  }\n}"): (typeof documents)["\nquery getDemandDetail($ideaId: String!){\n  Idea(where: {id: {_eq: $ideaId}}) {\n    author\n    caption\n    createdAt\n    title\n    status\n    views\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

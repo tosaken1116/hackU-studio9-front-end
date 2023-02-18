@@ -215,6 +215,10 @@ export type Comment_Updates = {
 /** columns and relationships of "Idea" */
 export type Idea = {
   __typename?: 'Idea';
+  /** An array relationship */
+  Likes: Array<Likes>;
+  /** An aggregate relationship */
+  Likes_aggregate: Likes_Aggregate;
   author?: Maybe<Scalars['String']>;
   caption: Scalars['String'];
   createdAt: Scalars['timestamp'];
@@ -225,6 +229,26 @@ export type Idea = {
   updatedAt?: Maybe<Scalars['timestamp']>;
   userEmail?: Maybe<Scalars['String']>;
   views: Scalars['Int'];
+};
+
+
+/** columns and relationships of "Idea" */
+export type IdeaLikesArgs = {
+  distinct_on?: InputMaybe<Array<Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Likes_Order_By>>;
+  where?: InputMaybe<Likes_Bool_Exp>;
+};
+
+
+/** columns and relationships of "Idea" */
+export type IdeaLikes_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Likes_Order_By>>;
+  where?: InputMaybe<Likes_Bool_Exp>;
 };
 
 /** aggregated selection of "Idea" */
@@ -265,6 +289,8 @@ export type Idea_Avg_Fields = {
 
 /** Boolean expression to filter rows from the table "Idea". All fields are combined with a logical 'AND'. */
 export type Idea_Bool_Exp = {
+  Likes?: InputMaybe<Likes_Bool_Exp>;
+  Likes_aggregate?: InputMaybe<Likes_Aggregate_Bool_Exp>;
   _and?: InputMaybe<Array<Idea_Bool_Exp>>;
   _not?: InputMaybe<Idea_Bool_Exp>;
   _or?: InputMaybe<Array<Idea_Bool_Exp>>;
@@ -295,6 +321,7 @@ export type Idea_Inc_Input = {
 
 /** input type for inserting data into table "Idea" */
 export type Idea_Insert_Input = {
+  Likes?: InputMaybe<Likes_Arr_Rel_Insert_Input>;
   author?: InputMaybe<Scalars['String']>;
   caption?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['timestamp']>;
@@ -355,6 +382,7 @@ export type Idea_On_Conflict = {
 
 /** Ordering options when selecting data from "Idea". */
 export type Idea_Order_By = {
+  Likes_aggregate?: InputMaybe<Likes_Aggregate_Order_By>;
   author?: InputMaybe<Order_By>;
   caption?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
@@ -534,6 +562,17 @@ export type Likes_Aggregate = {
   nodes: Array<Likes>;
 };
 
+export type Likes_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Likes_Aggregate_Bool_Exp_Count>;
+};
+
+export type Likes_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Likes_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Likes_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "Likes" */
 export type Likes_Aggregate_Fields = {
   __typename?: 'Likes_aggregate_fields';
@@ -547,6 +586,20 @@ export type Likes_Aggregate_Fields = {
 export type Likes_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<Likes_Select_Column>>;
   distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "Likes" */
+export type Likes_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Likes_Max_Order_By>;
+  min?: InputMaybe<Likes_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "Likes" */
+export type Likes_Arr_Rel_Insert_Input = {
+  data: Array<Likes_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Likes_On_Conflict>;
 };
 
 /** Boolean expression to filter rows from the table "Likes". All fields are combined with a logical 'AND'. */
@@ -577,11 +630,23 @@ export type Likes_Max_Fields = {
   ideaID?: Maybe<Scalars['String']>;
 };
 
+/** order by max() on columns of table "Likes" */
+export type Likes_Max_Order_By = {
+  UserEmail?: InputMaybe<Order_By>;
+  ideaID?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Likes_Min_Fields = {
   __typename?: 'Likes_min_fields';
   UserEmail?: Maybe<Scalars['String']>;
   ideaID?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "Likes" */
+export type Likes_Min_Order_By = {
+  UserEmail?: InputMaybe<Order_By>;
+  ideaID?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "Likes" */
@@ -1742,9 +1807,9 @@ export type Query_Root = {
   Idea_aggregate: Idea_Aggregate;
   /** fetch data from the table: "Idea" using primary key columns */
   Idea_by_pk?: Maybe<Idea>;
-  /** fetch data from the table: "Likes" */
+  /** An array relationship */
   Likes: Array<Likes>;
-  /** fetch aggregated fields from the table: "Likes" */
+  /** An aggregate relationship */
   Likes_aggregate: Likes_Aggregate;
   /** fetch data from the table: "Likes" using primary key columns */
   Likes_by_pk?: Maybe<Likes>;
@@ -1925,9 +1990,9 @@ export type Subscription_Root = {
   Idea_by_pk?: Maybe<Idea>;
   /** fetch data from the table in a streaming manner: "Idea" */
   Idea_stream: Array<Idea>;
-  /** fetch data from the table: "Likes" */
+  /** An array relationship */
   Likes: Array<Likes>;
-  /** fetch aggregated fields from the table: "Likes" */
+  /** An aggregate relationship */
   Likes_aggregate: Likes_Aggregate;
   /** fetch data from the table: "Likes" using primary key columns */
   Likes_by_pk?: Maybe<Likes>;
@@ -2166,10 +2231,18 @@ export type Timestamptz_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['timestamptz']>>;
 };
 
-export type TestQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetHomeDemandsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type TestQuery = { __typename?: 'query_root', User: Array<{ __typename?: 'User', name?: string | null }> };
+export type GetHomeDemandsQuery = { __typename?: 'query_root', Idea: Array<{ __typename?: 'Idea', author?: string | null, title: string, status: any, createdAt: any, views: number, id: string }> };
+
+export type GetDemandDetailQueryVariables = Exact<{
+  ideaId: Scalars['String'];
+}>;
 
 
-export const TestDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"test"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"User"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<TestQuery, TestQueryVariables>;
+export type GetDemandDetailQuery = { __typename?: 'query_root', Idea: Array<{ __typename?: 'Idea', author?: string | null, caption: string, createdAt: any, title: string, status: any, views: number }> };
+
+
+export const GetHomeDemandsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getHomeDemands"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Idea"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"20"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"views"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<GetHomeDemandsQuery, GetHomeDemandsQueryVariables>;
+export const GetDemandDetailDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getDemandDetail"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"ideaId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Idea"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"ideaId"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"}},{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"views"}}]}}]}}]} as unknown as DocumentNode<GetDemandDetailQuery, GetDemandDetailQueryVariables>;

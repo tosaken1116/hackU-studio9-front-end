@@ -1,17 +1,14 @@
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ViewKanbanIcon from "@mui/icons-material/ViewKanban";
 import { Box, Paper, Stack, Typography } from "@mui/material";
+import { useDemandDetail } from "../../Hooks/hooks";
 import Comments from "../Comment/Comments";
 export default function DemandDetail() {
-    const demodata = {
-        title: "testtitle",
-        createdAt: "2022-02-16",
-        author: "test",
-        goodNumber: "1",
-        viewNumber: "1",
-        isResolved: false,
-        caption: "test caption",
-    };
+    const { demandDetail, isLoading } = useDemandDetail();
+    console.log(demandDetail);
+    if (isLoading) {
+        return <></>;
+    }
     return (
         <Box flexGrow={1} p={2} sx={{ overflow: "auto", maxHeight: "85vh" }}>
             <Stack p={2} spacing={2}>
@@ -19,33 +16,35 @@ export default function DemandDetail() {
                     <Stack p={3} spacing={2}>
                         <Stack>
                             <Typography variant="h3">
-                                {demodata.title}
+                                {demandDetail.title}
                             </Typography>
                             <Stack direction="row">
                                 <Box flexGrow={1}></Box>
-                                <Typography>{demodata.author}</Typography>
+                                <Typography>{demandDetail.author}</Typography>
                             </Stack>
                         </Stack>
                         <Typography variant="body1">
-                            {demodata.caption}
+                            {demandDetail.caption}
                         </Typography>
                         <Stack direction="row" spacing={2}>
                             <Box>
                                 <Typography
                                     sx={{
-                                        color: demodata.isResolved
+                                        color: demandDetail.isResolved
                                             ? "green"
                                             : "red",
                                     }}
                                 >
-                                    {demodata.isResolved ? "解決済" : "未解決"}
+                                    {demandDetail.isResolved
+                                        ? "解決済"
+                                        : "未解決"}
                                 </Typography>
                             </Box>
                             <Box>
                                 <Stack direction="row">
                                     <ViewKanbanIcon fontSize="small" />
                                     <Typography>
-                                        {demodata.viewNumber}
+                                        {demandDetail.viewNumber}
                                     </Typography>
                                 </Stack>
                             </Box>
@@ -53,7 +52,7 @@ export default function DemandDetail() {
                                 <Stack direction="row">
                                     <ThumbUpIcon fontSize="small" />
                                     <Typography>
-                                        {demodata.goodNumber}
+                                        {demandDetail.goodNumber}
                                     </Typography>
                                 </Stack>
                             </Box>
