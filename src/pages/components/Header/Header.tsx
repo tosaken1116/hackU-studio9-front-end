@@ -43,7 +43,7 @@ export default function Header() {
                             onClick={() => signIn()}
                             startIcon={<LoginIcon />}
                         >
-                            サインイン
+                            ログイン
                         </Button>
                     </Box>
                 )}

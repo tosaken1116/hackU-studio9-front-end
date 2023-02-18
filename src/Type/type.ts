@@ -16,7 +16,7 @@ export type DemandDetailModalProps = {
     isModalOpen: boolean;
     modalClose: () => void;
 };
-export type ProfilePopOverProps = {
+export type PopOverProps = {
     closePopOver: () => void;
     anchorElement: HTMLButtonElement | null;
 };
