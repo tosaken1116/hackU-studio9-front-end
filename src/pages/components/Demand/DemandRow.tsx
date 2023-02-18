@@ -27,7 +27,7 @@ export default function DemandRow({
         setAnchorElement(event.currentTarget);
     };
     return (
-        <Stack p={2}>
+        <Stack p={2} sx={{ flexGrow: 1 }}>
             <Stack direction="row">
                 <Button
                     onClick={() => {

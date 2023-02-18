@@ -10,10 +10,18 @@ export default function TopPage() {
     const matches: boolean = useMediaQuery("(min-width:1000px)");
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { data, loading } = useQuery(getHomeDemandsDoc);
-
+    if (loading) {
+        return <></>;
+    }
     return (
         <Box>
-            <Stack direction="row" sx={{ height: matches ? "85vh" : "74vh" }}>
+            <Stack
+                direction="row"
+                sx={{
+                    height: matches ? "85vh" : "74vh",
+                    width: matches ? "100%" : "50%",
+                }}
+            >
                 <DemandsWrapper
                     maxHeight={matches ? "85vh" : "74vh"}
                     demands={data?.Idea}
@@ -21,10 +29,12 @@ export default function TopPage() {
                 ></DemandsWrapper>
                 {matches && <DemandDetail />}
             </Stack>
-            <DemandDetailModal
-                isModalOpen={isModalOpen}
-                modalClose={() => setIsModalOpen(false)}
-            />
+            {!matches && (
+                <DemandDetailModal
+                    isModalOpen={isModalOpen}
+                    modalClose={() => setIsModalOpen(false)}
+                />
+            )}
         </Box>
     );
 }

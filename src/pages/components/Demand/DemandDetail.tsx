@@ -5,11 +5,15 @@ import { useDemandDetail } from "../../../Hooks/hooks";
 import Comments from "../Comment/Comments";
 export default function DemandDetail() {
     const { demandDetail, isLoading } = useDemandDetail();
-    if (isLoading) {
+    if (isLoading || demandDetail == undefined) {
         return <></>;
     }
     return (
-        <Box flexGrow={1} p={2} sx={{ overflow: "auto", maxHeight: "85vh" }}>
+        <Box
+            flexGrow={1}
+            p={2}
+            sx={{ overflow: "auto", maxHeight: "85vh", width: "100%" }}
+        >
             <Stack p={2} spacing={2}>
                 <Paper>
                     <Stack p={3} spacing={2}>

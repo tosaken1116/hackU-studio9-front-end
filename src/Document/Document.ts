@@ -24,3 +24,17 @@ query getDemandDetail($ideaId: String!){
     views
   }
 }`
+
+export const getSearchResultDoc = gql`
+query getSearchResult($searchWord: String!) {
+  Idea(where: {title: {_nilike: $searchWord}}) {
+    views
+    updatedAt
+    title
+    status
+    id
+    createdAt
+    author
+  }
+  }
+`
