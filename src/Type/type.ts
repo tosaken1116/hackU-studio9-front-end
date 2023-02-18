@@ -7,7 +7,8 @@ export type DemandRowType = {
     author: string;
     goodNumber: string;
     title: string;
-    viewNumber: string;
+    views: string;
+    id:string
     status: "inProgress" | "resolved" | "unResolved" | String;
 };
 
@@ -22,5 +23,8 @@ export type ProfilePopOverProps = {
 export type DemandsType = {
     maxHeight: string
     demands: DemandRowType[]
-
+    openModal:()=>void
+}
+export type ideaIdProps = {
+    ideaId: string
 }

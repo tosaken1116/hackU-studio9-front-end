@@ -1,5 +1,7 @@
+import { useQuery } from "@apollo/client";
 import { Box, Stack, useMediaQuery } from "@mui/material";
 import { useState } from "react";
+import { getHomeDemandsDoc } from "../Document/Document";
 import DemandDetail from "./components/Demand/DemandDetail";
 import DemandDetailModal from "./components/Demand/DemandDetailModal";
 import DemandsWrapper from "./components/Demand/Demands";
@@ -7,159 +9,15 @@ import DemandsWrapper from "./components/Demand/Demands";
 export default function TopPage() {
     const matches: boolean = useMediaQuery("(min-width:1000px)");
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const { data, loading } = useQuery(getHomeDemandsDoc);
 
-    const demodata = [
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "unResolved",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "resolved",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-        {
-            title: "testtitle",
-            createdAt: "2022-02-16",
-            author: "test",
-            goodNumber: "1",
-            viewNumber: "1",
-            status: "inProgress",
-            caption: "test caption",
-        },
-    ];
     return (
         <Box>
-            <Stack direction="row">
+            <Stack direction="row" sx={{ height: matches ? "85vh" : "74vh" }}>
                 <DemandsWrapper
                     maxHeight={matches ? "85vh" : "74vh"}
-                    demands={demodata}
+                    demands={data?.Idea}
+                    openModal={() => setIsModalOpen(true)}
                 ></DemandsWrapper>
                 {matches && <DemandDetail />}
             </Stack>
