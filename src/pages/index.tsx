@@ -1,10 +1,10 @@
 import { useQuery } from "@apollo/client";
 import { Box, Stack, useMediaQuery } from "@mui/material";
 import { useState } from "react";
+import { getHomeDemandsDoc } from "../Document/Document";
 import DemandDetail from "./components/Demand/DemandDetail";
 import DemandDetailModal from "./components/Demand/DemandDetailModal";
 import DemandsWrapper from "./components/Demand/Demands";
-import { getHomeDemandsDoc } from "./Document/Document";
 
 export default function TopPage() {
     const matches: boolean = useMediaQuery("(min-width:1000px)");

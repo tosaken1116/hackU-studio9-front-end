@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { ideaIdProps } from "../../Type/type";
 import { getDemandDetailDoc } from "../Document/Document";
+import { ideaIdProps } from "../Type/type";
 
 export const useDemandDetail =()=> {
     const router = useRouter()
