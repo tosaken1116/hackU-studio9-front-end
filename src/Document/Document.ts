@@ -50,3 +50,28 @@ query getComment($ideaId: uuid!)
   }
   }
 `
+export const getProfileDoc = gql`
+query getProfile($email: String!) {
+  users(where: {email: {_eq: $email}}) {
+    description
+    name
+    picture
+    isEmailPublic
+    email
+  }
+}
+
+`
+export const updateProfileDoc = gql`
+mutation updateProfile($email: String!,$description: String!, $isEmailPublic: Boolean!) {
+  update_users(where: {email: {_eq: $email}}, _set: {description: $description, isEmailPublic: $isEmailPublic}) {
+    affected_rows
+    returning {
+      description
+      name
+      picture
+    }
+  }
+}
+
+`

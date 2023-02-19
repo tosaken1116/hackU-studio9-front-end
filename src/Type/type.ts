@@ -39,3 +39,7 @@ export type SearchWordProps = {
 export type SearchResultProps = {
     openModal:()=>void
 }
+export type updateProfileProps = {
+    description: string
+    isEmailPublic:boolean
+}

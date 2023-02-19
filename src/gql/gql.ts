@@ -17,6 +17,8 @@ const documents = {
     "\nquery getDemandDetail($ideaId: uuid!){\n  ideas(where: {id: {_eq: $ideaId}}) {\n    author\n    caption\n    createdAt\n    title\n    status\n    views\n  }\n}": types.GetDemandDetailDocument,
     "\nquery getSearchResult($searchWord: String!) {\n  ideas(where: {title: {_nilike: $searchWord}}) {\n    views\n    updatedAt\n    title\n    status\n    id\n    createdAt\n    author\n  }\n  }\n": types.GetSearchResultDocument,
     "\nquery getComment($ideaId: uuid!)\n{\n  comments(where: {ideaID: {_eq: $ideaId}}) {\n    author:user {\n      name\n    }\n    createdAt\n    caption\n  }\n  }\n": types.GetCommentDocument,
+    "\nquery getProfile($email: String!) {\n  users(where: {email: {_eq: $email}}) {\n    description\n    name\n    picture\n    isEmailPublic\n    email\n  }\n}\n\n": types.GetProfileDocument,
+    "\nmutation updateProfile($email: String!,$description: String!, $isEmailPublic: Boolean!) {\n  update_users(where: {email: {_eq: $email}}, _set: {description: $description, isEmailPublic: $isEmailPublic}) {\n    affected_rows\n    returning {\n      description\n      name\n      picture\n    }\n  }\n}\n\n": types.UpdateProfileDocument,
 };
 
 /**
@@ -49,6 +51,14 @@ export function graphql(source: "\nquery getSearchResult($searchWord: String!) {
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\nquery getComment($ideaId: uuid!)\n{\n  comments(where: {ideaID: {_eq: $ideaId}}) {\n    author:user {\n      name\n    }\n    createdAt\n    caption\n  }\n  }\n"): (typeof documents)["\nquery getComment($ideaId: uuid!)\n{\n  comments(where: {ideaID: {_eq: $ideaId}}) {\n    author:user {\n      name\n    }\n    createdAt\n    caption\n  }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\nquery getProfile($email: String!) {\n  users(where: {email: {_eq: $email}}) {\n    description\n    name\n    picture\n    isEmailPublic\n    email\n  }\n}\n\n"): (typeof documents)["\nquery getProfile($email: String!) {\n  users(where: {email: {_eq: $email}}) {\n    description\n    name\n    picture\n    isEmailPublic\n    email\n  }\n}\n\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\nmutation updateProfile($email: String!,$description: String!, $isEmailPublic: Boolean!) {\n  update_users(where: {email: {_eq: $email}}, _set: {description: $description, isEmailPublic: $isEmailPublic}) {\n    affected_rows\n    returning {\n      description\n      name\n      picture\n    }\n  }\n}\n\n"): (typeof documents)["\nmutation updateProfile($email: String!,$description: String!, $isEmailPublic: Boolean!) {\n  update_users(where: {email: {_eq: $email}}, _set: {description: $description, isEmailPublic: $isEmailPublic}) {\n    affected_rows\n    returning {\n      description\n      name\n      picture\n    }\n  }\n}\n\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

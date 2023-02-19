@@ -1,9 +1,9 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { getDemandDetailDoc, getSearchResultDoc,getCommentDoc } from "../Document/Document";
-import { ideaIdProps } from "../Type/type";
+import { getCommentDoc, getDemandDetailDoc, getProfileDoc, getSearchResultDoc, updateProfileDoc } from "../Document/Document";
+import { ideaIdProps, updateProfileProps } from "../Type/type";
 import { SearchWordProps } from './../Type/type';
-import { GetCommentDocument } from '../gql/graphql';
 
 export const useDemandDetail =()=> {
     const router = useRouter()
@@ -49,4 +49,14 @@ export const useComments = () => {
     const router = useRouter()
     const { data, loading } = useQuery(getCommentDoc, { variables: { ideaId: router.query.ideaId } })
     return { comments:data?.comments,isLoading:loading}
+}
+export const useProfile = () => {
+    const { data: session, status } = useSession();
+    const { data, loading } = useQuery(getProfileDoc, { variables: { email: session?.user?.email } })
+    const [updateProfile,{error}] = useMutation(updateProfileDoc)
+    const handleUpdateProfile = async ({description,isEmailPublic}:updateProfileProps) => {
+        const result = await updateProfile({ variables: { email: session?.user?.email, description: description,isEmailPublic:isEmailPublic } })
+        return result?.data?.update_users?.returning
+    }
+    return {profile:data?.users[0],handleUpdateProfile,loading}
 }
