@@ -1,7 +1,7 @@
 import CloseIcon from "@mui/icons-material/Close";
 import { Box, IconButton, Modal } from "@mui/material";
 import {} from "@mui/system";
-import { DemandDetailModalProps } from "../../../Type/type";
+import { DemandDetailModalProps } from "../../Type/type";
 import DemandDetail from "./DemandDetail";
 export default function DemandDetailModal({
     isModalOpen,

@@ -1,13 +1,14 @@
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { getDemandDetailDoc, getSearchResultDoc } from "../Document/Document";
+import { getDemandDetailDoc, getSearchResultDoc,getCommentDoc } from "../Document/Document";
 import { ideaIdProps } from "../Type/type";
 import { SearchWordProps } from './../Type/type';
+import { GetCommentDocument } from '../gql/graphql';
 
 export const useDemandDetail =()=> {
     const router = useRouter()
     const { data, loading } = useQuery(getDemandDetailDoc, { variables: { ideaId: router.query.ideaId } })
-    return { demandDetail:data?.Idea[0],isLoading:loading}
+    return { demandDetail:data?.ideas[0],isLoading:loading}
 }
 export const useDemandDetailQuery = () => {
     const router = useRouter()
@@ -24,7 +25,7 @@ export const useSearch = () => {
         variables: { searchWord: searchWord },
     });
     return {
-        Idea: data?.Idea,
+        Idea: data?.ideas,
     };
 };
 export const useSearchParams = () => {
@@ -44,3 +45,8 @@ export const useSearchParams = () => {
         handleSearchInput: handleSearchInput,
     };
 };
+export const useComments = () => {
+    const router = useRouter()
+    const { data, loading } = useQuery(getCommentDoc, { variables: { ideaId: router.query.ideaId } })
+    return { comments:data?.comments,isLoading:loading}
+}

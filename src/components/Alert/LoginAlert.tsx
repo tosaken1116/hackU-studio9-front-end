@@ -1,5 +1,5 @@
 import { Paper, Popover, useMediaQuery } from "@mui/material";
-import { PopOverProps } from "../../../Type/type";
+import { PopOverProps } from "../../Type/type";
 
 export default function AlertPopover({
     anchorElement,

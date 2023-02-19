@@ -1,5 +1,5 @@
 import { Box, Stack, useMediaQuery } from "@mui/material";
-import { LayoutProps } from "../../../Type/type";
+import { LayoutProps } from "../../Type/type";
 import BottomBar from "../BottomBar/BottomBar";
 import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";

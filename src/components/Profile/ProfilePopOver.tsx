@@ -1,6 +1,6 @@
 import { Paper, Popover, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import { PopOverProps } from "../../../Type/type";
+import { PopOverProps } from "../../Type/type";
 
 export default function ProfilePopOver({
     anchorElement,

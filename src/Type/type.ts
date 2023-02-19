@@ -11,6 +11,11 @@ export type DemandRowType = {
     id:string
     status: "inProgress" | "resolved" | "unResolved" | String;
 };
+export type CommentRowType = {
+    createdAt:string,
+    author: { name:string},
+    caption:string,
+}
 
 export type DemandDetailModalProps = {
     isModalOpen: boolean;

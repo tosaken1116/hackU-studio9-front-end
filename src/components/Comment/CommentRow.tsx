@@ -1,17 +1,17 @@
 import { Box, Paper, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
-import { DemandRowType } from "../../../Type/type";
+import { CommentRowType } from "../../Type/type";
 
 export default function CommentRow({
     createdAt,
     author,
     caption,
-}: Pick<DemandRowType, "createdAt" | "author" | "caption">) {
+}: CommentRowType) {
     return (
         <Paper>
             <Stack p={2} spacing={2}>
                 <Stack direction="row">
-                    <Typography>{author}</Typography>
+                    <Typography>{author.name}</Typography>
                     <Box flexGrow={1}></Box>
                     <Typography>{createdAt}</Typography>
                 </Stack>

@@ -1,5 +1,5 @@
 import { Box, TextField } from "@mui/material";
-import { useSearchParams } from "../../../Hooks/hooks";
+import { useSearchParams } from "../../Hooks/hooks";
 
 export default function SearchBox() {
     const { handleSearchInput } = useSearchParams();
