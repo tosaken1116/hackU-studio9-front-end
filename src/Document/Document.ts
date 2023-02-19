@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const getHomeDemandsDoc = gql`
     query getHomeDemands {
-        Idea(limit: 20) {
+      ideas(limit: 20) {
             author
             title
             status
@@ -14,8 +14,8 @@ export const getHomeDemandsDoc = gql`
 `;
 
 export const getDemandDetailDoc = gql`
-query getDemandDetail($ideaId: String!){
-  Idea(where: {id: {_eq: $ideaId}}) {
+query getDemandDetail($ideaId: uuid!){
+  ideas(where: {id: {_eq: $ideaId}}) {
     author
     caption
     createdAt
@@ -27,7 +27,7 @@ query getDemandDetail($ideaId: String!){
 
 export const getSearchResultDoc = gql`
 query getSearchResult($searchWord: String!) {
-  Idea(where: {title: {_nilike: $searchWord}}) {
+  ideas(where: {title: {_nilike: $searchWord}}) {
     views
     updatedAt
     title
@@ -35,6 +35,18 @@ query getSearchResult($searchWord: String!) {
     id
     createdAt
     author
+  }
+  }
+`
+export const getCommentDoc = gql`
+query getComment($ideaId: uuid!)
+{
+  comments(where: {ideaID: {_eq: $ideaId}}) {
+    author:user {
+      name
+    }
+    createdAt
+    caption
   }
   }
 `

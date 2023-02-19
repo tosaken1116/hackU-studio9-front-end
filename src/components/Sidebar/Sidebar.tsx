@@ -14,7 +14,6 @@ import AlertPopover from "../Alert/LoginAlert";
 export default function Sidebar() {
     const router = useRouter();
     const { data: session, status } = useSession();
-    console.log(session);
     const [isHover, setIsHover] = useState(false);
     const [anchorElement, setAnchorElement] =
         useState<HTMLButtonElement | null>(null);

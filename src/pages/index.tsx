@@ -1,10 +1,10 @@
 import { useQuery } from "@apollo/client";
 import { Box, Stack, useMediaQuery } from "@mui/material";
 import { useState } from "react";
+import DemandDetail from "../components/Demand/DemandDetail";
+import DemandDetailModal from "../components/Demand/DemandDetailModal";
+import DemandsWrapper from "../components/Demand/Demands";
 import { getHomeDemandsDoc } from "../Document/Document";
-import DemandDetail from "./components/Demand/DemandDetail";
-import DemandDetailModal from "./components/Demand/DemandDetailModal";
-import DemandsWrapper from "./components/Demand/Demands";
 
 export default function TopPage() {
     const matches: boolean = useMediaQuery("(min-width:1000px)");
@@ -24,7 +24,7 @@ export default function TopPage() {
             >
                 <DemandsWrapper
                     maxHeight={matches ? "85vh" : "74vh"}
-                    demands={data?.Idea}
+                    demands={data?.ideas}
                     openModal={() => setIsModalOpen(true)}
                 ></DemandsWrapper>
                 {matches && <DemandDetail />}

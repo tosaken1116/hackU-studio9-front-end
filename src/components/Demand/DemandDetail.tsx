@@ -1,7 +1,7 @@
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ViewKanbanIcon from "@mui/icons-material/ViewKanban";
 import { Box, Paper, Stack, Typography } from "@mui/material";
-import { useDemandDetail } from "../../../Hooks/hooks";
+import { useDemandDetail } from "../../Hooks/hooks";
 import Comments from "../Comment/Comments";
 export default function DemandDetail() {
     const { demandDetail, isLoading } = useDemandDetail();

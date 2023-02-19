@@ -1,5 +1,5 @@
 import { Divider, List, ListItem, Stack, useMediaQuery } from "@mui/material";
-import { DemandsType } from "../../../Type/type";
+import { DemandsType } from "../../Type/type";
 import DemandRow from "./DemandRow";
 
 const Demands = ({ maxHeight, demands, openModal }: DemandsType) => {

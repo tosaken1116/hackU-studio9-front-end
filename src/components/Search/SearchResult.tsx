@@ -1,7 +1,6 @@
 import { useMediaQuery } from "@mui/material";
-import { useState } from "react";
-import { useSearch } from "../../../Hooks/hooks";
-import { SearchResultProps } from "../../../Type/type";
+import { useSearch } from "../../Hooks/hooks";
+import { SearchResultProps } from "../../Type/type";
 import DemandsWrapper from "../Demand/Demands";
 
 export default function SearchResult({ openModal }: SearchResultProps) {
