@@ -12,6 +12,10 @@ const createApolloClient = (authToken?: string) => {
         ssrMode: typeof window === "undefined",
         link: new HttpLink({
             uri: process.env.NEXT_PUBLIC_END_POINT_URL,
+            headers: {
+                "x-hasura-admin-secret":
+                    String(process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ADMIN_SECRET),
+            }
         }),
         cache: new InMemoryCache(),
     });

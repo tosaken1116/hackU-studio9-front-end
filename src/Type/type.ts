@@ -7,15 +7,35 @@ export type DemandRowType = {
     author: string;
     goodNumber: string;
     title: string;
-    viewNumber: string;
+    views: string;
+    id:string
     status: "inProgress" | "resolved" | "unResolved" | String;
 };
+export type CommentRowType = {
+    createdAt:string,
+    author: { name:string},
+    caption:string,
+}
 
 export type DemandDetailModalProps = {
     isModalOpen: boolean;
     modalClose: () => void;
 };
-export type ProfilePopOverProps = {
+export type PopOverProps = {
     closePopOver: () => void;
     anchorElement: HTMLButtonElement | null;
 };
+export type DemandsType = {
+    maxHeight: string
+    demands: DemandRowType[]
+    openModal:()=>void
+}
+export type ideaIdProps = {
+    ideaId: string
+}
+export type SearchWordProps = {
+    searchWord: string;
+};
+export type SearchResultProps = {
+    openModal:()=>void
+}

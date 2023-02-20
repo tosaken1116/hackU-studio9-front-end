@@ -3,7 +3,8 @@ import ViewKanbanIcon from "@mui/icons-material/ViewKanban";
 import { Box, Button, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useState } from "react";
-import { DemandRowType } from "../../../Type/type";
+import { useDemandDetailQuery } from "../../Hooks/hooks";
+import { DemandRowType, DemandsType } from "../../Type/type";
 import ProfilePopOver from "../Profile/ProfilePopOver";
 
 export default function DemandRow({
@@ -11,20 +12,31 @@ export default function DemandRow({
     author,
     goodNumber,
     title,
-    viewNumber,
+    views,
     status,
-}: DemandRowType) {
+    id,
+    openModal,
+}: DemandRowType & Pick<DemandsType, "openModal">) {
     const [anchorElement, setAnchorElement] =
         useState<HTMLButtonElement | null>(null);
+    const { isReady, setDemandDetailQuery } = useDemandDetailQuery();
+
     const handleOpenProfilePopOver = (
         event: React.MouseEvent<HTMLButtonElement>
     ) => {
         setAnchorElement(event.currentTarget);
     };
     return (
-        <Stack p={2}>
+        <Stack p={2} sx={{ flexGrow: 1 }}>
             <Stack direction="row">
-                <Typography variant="h5">{title}</Typography>
+                <Button
+                    onClick={() => {
+                        openModal();
+                        setDemandDetailQuery({ ideaId: id });
+                    }}
+                >
+                    <Typography variant="h5">{title}</Typography>
+                </Button>
                 <Box flexGrow={1}></Box>
                 <Button onClick={handleOpenProfilePopOver}>
                     <Typography>質問者:{author}</Typography>
@@ -57,7 +69,7 @@ export default function DemandRow({
                 </Stack>
                 <Stack direction="row">
                     <ViewKanbanIcon fontSize="small" />
-                    <Typography>{viewNumber}</Typography>
+                    <Typography>{views}</Typography>
                 </Stack>
                 <Typography variant="body2">{createdAt}</Typography>
             </Stack>
