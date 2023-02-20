@@ -5,6 +5,7 @@ import { Stack } from "@mui/system";
 import { useState } from "react";
 import { useDemandDetailQuery } from "../../Hooks/hooks";
 import { DemandRowType, DemandsType } from "../../Type/type";
+import { Date } from "../Format/Date";
 import ProfilePopOver from "../Profile/ProfilePopOver";
 
 export default function DemandRow({
@@ -71,7 +72,7 @@ export default function DemandRow({
                     <ViewKanbanIcon fontSize="small" />
                     <Typography>{views}</Typography>
                 </Stack>
-                <Typography variant="body2">{createdAt}</Typography>
+                <Date dateString={createdAt} />
             </Stack>
         </Stack>
     );

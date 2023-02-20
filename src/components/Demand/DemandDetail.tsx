@@ -3,6 +3,7 @@ import ViewKanbanIcon from "@mui/icons-material/ViewKanban";
 import { Box, Paper, Stack, Typography } from "@mui/material";
 import { useDemandDetail } from "../../Hooks/hooks";
 import Comments from "../Comment/Comments";
+import { Date } from "../Format/Date";
 export default function DemandDetail() {
     const { demandDetail, isLoading } = useDemandDetail();
     if (isLoading || demandDetail == undefined) {
@@ -51,7 +52,7 @@ export default function DemandDetail() {
                                     </Typography>
                                 </Stack>
                             </Box>
-                            <Box>
+                            <Box flexGrow={1}>
                                 <Stack direction="row">
                                     <ThumbUpIcon fontSize="small" />
                                     <Typography>
@@ -59,6 +60,7 @@ export default function DemandDetail() {
                                     </Typography>
                                 </Stack>
                             </Box>
+                            <Date dateString={demandDetail.createdAt} />
                         </Stack>
                     </Stack>
                 </Paper>
