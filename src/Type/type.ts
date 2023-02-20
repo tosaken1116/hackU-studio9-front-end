@@ -43,3 +43,6 @@ export type updateProfileProps = {
     description: string
     isEmailPublic:boolean
 }
+export type TimeProps = {
+    dateString:string
+}
