@@ -46,3 +46,7 @@ export type updateProfileProps = {
 export type TimeProps = {
     dateString:string
 }
+export type DebounceExecuteProps = {
+    keyword: string;
+    timeOutMillSec: number;
+};
