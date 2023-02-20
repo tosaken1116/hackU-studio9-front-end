@@ -27,7 +27,7 @@ query getDemandDetail($ideaId: uuid!){
 
 export const getSearchResultDoc = gql`
 query getSearchResult($searchWord: String!) {
-  ideas(where: {title: {_nilike: $searchWord}}) {
+  ideas(where: {title: {_like: $searchWord}}) {
     views
     updatedAt
     title

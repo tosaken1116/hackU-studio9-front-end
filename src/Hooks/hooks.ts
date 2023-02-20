@@ -1,8 +1,9 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { getCommentDoc, getDemandDetailDoc, getProfileDoc, getSearchResultDoc, updateProfileDoc } from "../Document/Document";
-import { ideaIdProps, updateProfileProps } from "../Type/type";
+import { DebounceExecuteProps, ideaIdProps, updateProfileProps } from "../Type/type";
 import { SearchWordProps } from './../Type/type';
 
 export const useDemandDetail =()=> {
@@ -20,9 +21,14 @@ export const useDemandDetailQuery = () => {
 }
 export const useSearch = () => {
     const router = useRouter();
-    const searchWord = router.query.searchWord;
+    const searchWord = String(router.query.searchWord);
+    const { debouncedKeyword } = useDebounceSearch({
+        keyword: searchWord,
+        timeOutMillSec: 1000,
+    });
+
     const { data } = useQuery(getSearchResultDoc, {
-        variables: { searchWord: searchWord },
+        variables: { searchWord: debouncedKeyword!=""?`%${debouncedKeyword}%`:"" },
     });
     return {
         Idea: data?.ideas,
@@ -60,3 +66,19 @@ export const useProfile = () => {
     }
     return {profile:data?.users[0],handleUpdateProfile,loading}
 }
+
+export const useDebounceSearch = ({
+    keyword,
+    timeOutMillSec,
+}: DebounceExecuteProps) => {
+    const [debouncedKeyword, setDebouncedKeyword] = useState(keyword);
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedKeyword(keyword);
+        }, timeOutMillSec);
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [keyword, timeOutMillSec]);
+    return { debouncedKeyword };
+};
