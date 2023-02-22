@@ -4,19 +4,29 @@ import {
     InMemoryCache,
     NormalizedCacheObject
 } from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 import "cross-fetch/polyfill";
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
+
+const httpLink = new HttpLink({
+    uri: process.env.NEXT_PUBLIC_END_POINT_URL,
+})
+
+const headerLink = setContext((request, previousContext) => {
+    const token = localStorage.getItem("token")
+    return {
+        headers: {
+            ...previousContext.headers,
+            authorization: token ? `Bearer ${token}` : ""
+        }
+    }
+})
+
 const createApolloClient = (authToken?: string) => {
     return new ApolloClient({
         ssrMode: typeof window === "undefined",
-        link: new HttpLink({
-            uri: process.env.NEXT_PUBLIC_END_POINT_URL,
-            headers: {
-                "x-hasura-admin-secret":
-                    String(process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ADMIN_SECRET),
-            }
-        }),
+        link: headerLink.concat(httpLink),
         cache: new InMemoryCache(),
     });
 };
