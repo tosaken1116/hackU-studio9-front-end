@@ -11,6 +11,10 @@ let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 
 const httpLink = new HttpLink({
     uri: process.env.NEXT_PUBLIC_END_POINT_URL,
+    headers: {
+        "x-hasura-admin-secret":
+            String(process.env.NEXT_PUBLIC_HASURA_GRAPHQL_ADMIN_SECRET),
+    }
 })
 
 const headerLink = setContext((request, previousContext) => {
