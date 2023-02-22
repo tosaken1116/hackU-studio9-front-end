@@ -9,6 +9,11 @@ export const getHomeDemandsDoc = gql`
             createdAt
             views
             id
+            likes {
+              user {
+                email
+              }
+            }
         }
     }
 `;
@@ -22,6 +27,11 @@ query getDemandDetail($ideaId: uuid!){
     title
     status
     views
+    likes {
+      user {
+        email
+      }
+    }
   }
 }`
 
@@ -35,6 +45,11 @@ query getSearchResult($searchWord: String!) {
     id
     createdAt
     author
+    likes {
+      user {
+        email
+      }
+    }
   }
   }
 `
@@ -74,4 +89,22 @@ mutation updateProfile($email: String!,$description: String!, $isEmailPublic: Bo
   }
 }
 
+`
+
+export const insertLikeDoc = gql`
+mutation insertLike($ideaID: uuid!, $userEmail: String!) {
+  insert_likes_one(object: {userEmail: $userEmail, ideaID: $ideaID}) {
+    ideaID
+    userEmail
+  }
+}
+`
+
+export const deleteLikeDoc = gql`
+mutation deleteLike($userEmail: String!, $ideaID: uuid!) {
+  delete_likes_by_pk(ideaID: $ideaID, userEmail: $userEmail) {
+    ideaID
+    userEmail
+  }
+}
 `

@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { getCommentDoc, getDemandDetailDoc, getProfileDoc, getSearchResultDoc, updateProfileDoc } from "../Document/Document";
+import { deleteLikeDoc, getCommentDoc, getDemandDetailDoc, getProfileDoc, getSearchResultDoc, insertLikeDoc, updateProfileDoc } from "../Document/Document";
 import { DebounceExecuteProps, ideaIdProps, updateProfileProps } from "../Type/type";
 import { SearchWordProps } from './../Type/type';
 
@@ -82,3 +82,22 @@ export const useDebounceSearch = ({
     }, [keyword, timeOutMillSec]);
     return { debouncedKeyword };
 };
+
+export const useLike = () => {
+    const { data: session, status } = useSession();
+    const [insertLike] = useMutation(insertLikeDoc)
+    const [deleteLike] = useMutation(deleteLikeDoc)
+    const handleInsertLike = async(ideaID: string) => {
+        const result = await insertLike({variables: {ideaID: ideaID, userEmail: session?.user?.email}})
+        return result.data
+    }
+    const handleDeleteLike = async(ideaID: string) => {
+        const result = await deleteLike({variables: {ideaID: ideaID, userEmail: session?.user?.email}})
+        return result.data
+    }
+
+    return {
+        handleInsertLike: handleInsertLike,
+        handleDeleteLike: handleDeleteLike
+    }
+}

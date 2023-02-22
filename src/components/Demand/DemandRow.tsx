@@ -1,12 +1,14 @@
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ViewKanbanIcon from "@mui/icons-material/ViewKanban";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, IconButton, Typography, Checkbox } from "@mui/material";
 import { Stack } from "@mui/system";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { useDemandDetailQuery } from "../../Hooks/hooks";
+import { useDemandDetailQuery, useLike } from "../../Hooks/hooks";
 import { DemandRowType, DemandsType } from "../../Type/type";
 import { Date } from "../Format/Date";
 import ProfilePopOver from "../Profile/ProfilePopOver";
+import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
 
 export default function DemandRow({
     createdAt,
@@ -16,17 +18,34 @@ export default function DemandRow({
     views,
     status,
     id,
+    likes,
     openModal,
 }: DemandRowType & Pick<DemandsType, "openModal">) {
+    const {data: session } = useSession()
     const [anchorElement, setAnchorElement] =
         useState<HTMLButtonElement | null>(null);
+    const [isLiked, setIsLiked] = useState<boolean>(likes.some(u => (
+        u.user.email == session?.user?.email
+    )))
+    const [likesLength, setLikesLength] = useState<number>(likes.length)
     const { isReady, setDemandDetailQuery } = useDemandDetailQuery();
-
+    const {handleInsertLike, handleDeleteLike} = useLike()
     const handleOpenProfilePopOver = (
         event: React.MouseEvent<HTMLButtonElement>
     ) => {
         setAnchorElement(event.currentTarget);
     };
+    const handleLikes = () => {
+        if(isLiked) {
+            //delete like
+            handleDeleteLike(id)
+            setLikesLength(likesLength-1)
+        } else {
+            //add like
+            handleInsertLike(id)
+            setLikesLength(likesLength+1)
+        }
+    }
     return (
         <Stack p={2} sx={{ flexGrow: 1 }}>
             <Stack direction="row">
@@ -65,8 +84,11 @@ export default function DemandRow({
                         : "未解決"}
                 </Typography>
                 <Stack direction="row">
-                    <ThumbUpIcon fontSize="small" />
-                    <Typography>{goodNumber}</Typography>
+                    {/* <IconButton onClick={handleLikes}>
+                        <ThumbUpIcon fontSize="small" sx={{color: isLiked ? "" : ""}}/>
+                    </IconButton> */}
+                    <Checkbox onClick={handleLikes} onChange={() => setIsLiked(!isLiked)} checked={isLiked} icon={<ThumbUpAltOutlinedIcon fontSize="small"/>} checkedIcon={<ThumbUpIcon fontSize="small"/>}/>
+                    <Typography>{likesLength}</Typography>
                 </Stack>
                 <Stack direction="row">
                     <ViewKanbanIcon fontSize="small" />
