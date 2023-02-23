@@ -13,14 +13,15 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
-    "\n    query getHomeDemands {\n      ideas(limit: 20) {\n            author\n            title\n            status\n            createdAt\n            views\n            id\n            likes {\n              user {\n                email\n              }\n            }\n        }\n    }\n": types.GetHomeDemandsDocument,
-    "\nquery getDemandDetail($ideaId: uuid!){\n  ideas(where: {id: {_eq: $ideaId}}) {\n    author\n    caption\n    createdAt\n    title\n    status\n    views\n    likes {\n      user {\n        email\n      }\n    }\n  }\n}": types.GetDemandDetailDocument,
-    "\nquery getSearchResult($searchWord: String!) {\n  ideas(where: {title: {_like: $searchWord}}) {\n    views\n    updatedAt\n    title\n    status\n    id\n    createdAt\n    author\n    likes {\n      user {\n        email\n      }\n    }\n  }\n  }\n": types.GetSearchResultDocument,
-    "\nquery getComment($ideaId: uuid!)\n{\n  comments(where: {ideaID: {_eq: $ideaId}}) {\n    author:user {\n      name\n    }\n    createdAt\n    caption\n  }\n  }\n": types.GetCommentDocument,
+    "\n    query getHomeDemands {\n      ideas(limit: 20) {\n            author\n            title\n            status\n            created_at\n            views\n            id\n            likes {\n              user {\n                email\n              }\n            }\n        }\n    }\n": types.GetHomeDemandsDocument,
+    "\nquery getDemandDetail($ideaId: uuid!){\n  ideas(where: {id: {_eq: $ideaId}}) {\n    id\n    author\n    caption\n    created_at\n    title\n    status\n    views\n    likes {\n      user {\n        email\n      }\n    }\n  }\n}": types.GetDemandDetailDocument,
+    "\nquery getSearchResult($searchWord: String!) {\n  ideas(where: {title: {_like: $searchWord}}) {\n    views\n    updated_at\n    title\n    status\n    id\n    created_at\n    author\n    likes {\n      user {\n        email\n      }\n    }\n  }\n  }\n": types.GetSearchResultDocument,
+    "\nquery getComment($ideaId: uuid!)\n{\n  comments(where: {ideaID: {_eq: $ideaId}}) {\n    author:user {\n      name\n    }\n    created_at\n    caption\n  }\n  }\n": types.GetCommentDocument,
     "\nquery getProfile($email: String!) {\n  users(where: {email: {_eq: $email}}) {\n    description\n    name\n    picture\n    isEmailPublic\n    email\n  }\n}\n\n": types.GetProfileDocument,
     "\nmutation updateProfile($email: String!,$description: String!, $isEmailPublic: Boolean!) {\n  update_users(where: {email: {_eq: $email}}, _set: {description: $description, isEmailPublic: $isEmailPublic}) {\n    affected_rows\n    returning {\n      description\n      name\n      picture\n    }\n  }\n}\n\n": types.UpdateProfileDocument,
     "\nmutation insertLike($ideaID: uuid!, $userEmail: String!) {\n  insert_likes_one(object: {userEmail: $userEmail, ideaID: $ideaID}) {\n    ideaID\n    userEmail\n  }\n}\n": types.InsertLikeDocument,
     "\nmutation deleteLike($userEmail: String!, $ideaID: uuid!) {\n  delete_likes_by_pk(ideaID: $ideaID, userEmail: $userEmail) {\n    ideaID\n    userEmail\n  }\n}\n": types.DeleteLikeDocument,
+    "\nmutation viewsCountUp($ideaID: uuid!) {\n  update_ideas(where: {id: {_eq: $ideaID}}, _inc: {views: 1}) {\n    returning {\n      views\n    }\n  }\n}\n\n": types.ViewsCountUpDocument,
 };
 
 /**
@@ -40,19 +41,19 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n    query getHomeDemands {\n      ideas(limit: 20) {\n            author\n            title\n            status\n            createdAt\n            views\n            id\n            likes {\n              user {\n                email\n              }\n            }\n        }\n    }\n"): (typeof documents)["\n    query getHomeDemands {\n      ideas(limit: 20) {\n            author\n            title\n            status\n            createdAt\n            views\n            id\n            likes {\n              user {\n                email\n              }\n            }\n        }\n    }\n"];
+export function graphql(source: "\n    query getHomeDemands {\n      ideas(limit: 20) {\n            author\n            title\n            status\n            created_at\n            views\n            id\n            likes {\n              user {\n                email\n              }\n            }\n        }\n    }\n"): (typeof documents)["\n    query getHomeDemands {\n      ideas(limit: 20) {\n            author\n            title\n            status\n            created_at\n            views\n            id\n            likes {\n              user {\n                email\n              }\n            }\n        }\n    }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\nquery getDemandDetail($ideaId: uuid!){\n  ideas(where: {id: {_eq: $ideaId}}) {\n    author\n    caption\n    createdAt\n    title\n    status\n    views\n    likes {\n      user {\n        email\n      }\n    }\n  }\n}"): (typeof documents)["\nquery getDemandDetail($ideaId: uuid!){\n  ideas(where: {id: {_eq: $ideaId}}) {\n    author\n    caption\n    createdAt\n    title\n    status\n    views\n    likes {\n      user {\n        email\n      }\n    }\n  }\n}"];
+export function graphql(source: "\nquery getDemandDetail($ideaId: uuid!){\n  ideas(where: {id: {_eq: $ideaId}}) {\n    id\n    author\n    caption\n    created_at\n    title\n    status\n    views\n    likes {\n      user {\n        email\n      }\n    }\n  }\n}"): (typeof documents)["\nquery getDemandDetail($ideaId: uuid!){\n  ideas(where: {id: {_eq: $ideaId}}) {\n    id\n    author\n    caption\n    created_at\n    title\n    status\n    views\n    likes {\n      user {\n        email\n      }\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\nquery getSearchResult($searchWord: String!) {\n  ideas(where: {title: {_like: $searchWord}}) {\n    views\n    updatedAt\n    title\n    status\n    id\n    createdAt\n    author\n    likes {\n      user {\n        email\n      }\n    }\n  }\n  }\n"): (typeof documents)["\nquery getSearchResult($searchWord: String!) {\n  ideas(where: {title: {_like: $searchWord}}) {\n    views\n    updatedAt\n    title\n    status\n    id\n    createdAt\n    author\n    likes {\n      user {\n        email\n      }\n    }\n  }\n  }\n"];
+export function graphql(source: "\nquery getSearchResult($searchWord: String!) {\n  ideas(where: {title: {_like: $searchWord}}) {\n    views\n    updated_at\n    title\n    status\n    id\n    created_at\n    author\n    likes {\n      user {\n        email\n      }\n    }\n  }\n  }\n"): (typeof documents)["\nquery getSearchResult($searchWord: String!) {\n  ideas(where: {title: {_like: $searchWord}}) {\n    views\n    updated_at\n    title\n    status\n    id\n    created_at\n    author\n    likes {\n      user {\n        email\n      }\n    }\n  }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\nquery getComment($ideaId: uuid!)\n{\n  comments(where: {ideaID: {_eq: $ideaId}}) {\n    author:user {\n      name\n    }\n    createdAt\n    caption\n  }\n  }\n"): (typeof documents)["\nquery getComment($ideaId: uuid!)\n{\n  comments(where: {ideaID: {_eq: $ideaId}}) {\n    author:user {\n      name\n    }\n    createdAt\n    caption\n  }\n  }\n"];
+export function graphql(source: "\nquery getComment($ideaId: uuid!)\n{\n  comments(where: {ideaID: {_eq: $ideaId}}) {\n    author:user {\n      name\n    }\n    created_at\n    caption\n  }\n  }\n"): (typeof documents)["\nquery getComment($ideaId: uuid!)\n{\n  comments(where: {ideaID: {_eq: $ideaId}}) {\n    author:user {\n      name\n    }\n    created_at\n    caption\n  }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -69,6 +70,10 @@ export function graphql(source: "\nmutation insertLike($ideaID: uuid!, $userEmai
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\nmutation deleteLike($userEmail: String!, $ideaID: uuid!) {\n  delete_likes_by_pk(ideaID: $ideaID, userEmail: $userEmail) {\n    ideaID\n    userEmail\n  }\n}\n"): (typeof documents)["\nmutation deleteLike($userEmail: String!, $ideaID: uuid!) {\n  delete_likes_by_pk(ideaID: $ideaID, userEmail: $userEmail) {\n    ideaID\n    userEmail\n  }\n}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\nmutation viewsCountUp($ideaID: uuid!) {\n  update_ideas(where: {id: {_eq: $ideaID}}, _inc: {views: 1}) {\n    returning {\n      views\n    }\n  }\n}\n\n"): (typeof documents)["\nmutation viewsCountUp($ideaID: uuid!) {\n  update_ideas(where: {id: {_eq: $ideaID}}, _inc: {views: 1}) {\n    returning {\n      views\n    }\n  }\n}\n\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

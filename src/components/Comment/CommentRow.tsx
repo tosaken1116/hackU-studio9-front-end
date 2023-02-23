@@ -4,7 +4,7 @@ import { CommentRowType } from "../../Type/type";
 import { Date } from "../Format/Date";
 
 export default function CommentRow({
-    createdAt,
+    created_at,
     author,
     caption,
 }: CommentRowType) {
@@ -14,7 +14,7 @@ export default function CommentRow({
                 <Stack direction="row">
                     <Typography>{author.name}</Typography>
                     <Box flexGrow={1}></Box>
-                    <Date dateString={createdAt} />
+                    <Date dateString={created_at} />
                 </Stack>
                 <Typography variant="h6">{caption}</Typography>
             </Stack>

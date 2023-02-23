@@ -6,7 +6,7 @@ export const getHomeDemandsDoc = gql`
             author
             title
             status
-            createdAt
+            created_at
             views
             id
             likes {
@@ -21,9 +21,10 @@ export const getHomeDemandsDoc = gql`
 export const getDemandDetailDoc = gql`
 query getDemandDetail($ideaId: uuid!){
   ideas(where: {id: {_eq: $ideaId}}) {
+    id
     author
     caption
-    createdAt
+    created_at
     title
     status
     views
@@ -39,11 +40,11 @@ export const getSearchResultDoc = gql`
 query getSearchResult($searchWord: String!) {
   ideas(where: {title: {_like: $searchWord}}) {
     views
-    updatedAt
+    updated_at
     title
     status
     id
-    createdAt
+    created_at
     author
     likes {
       user {
@@ -60,7 +61,7 @@ query getComment($ideaId: uuid!)
     author:user {
       name
     }
-    createdAt
+    created_at
     caption
   }
   }
@@ -107,4 +108,15 @@ mutation deleteLike($userEmail: String!, $ideaID: uuid!) {
     userEmail
   }
 }
+`
+
+export const viewsCountUpDoc = gql`
+mutation viewsCountUp($ideaID: uuid!) {
+  update_ideas(where: {id: {_eq: $ideaID}}, _inc: {views: 1}) {
+    returning {
+      views
+    }
+  }
+}
+
 `

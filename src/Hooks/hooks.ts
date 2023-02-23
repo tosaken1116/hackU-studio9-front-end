@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { deleteLikeDoc, getCommentDoc, getDemandDetailDoc, getProfileDoc, getSearchResultDoc, insertLikeDoc, updateProfileDoc } from "../Document/Document";
+import { deleteLikeDoc, getCommentDoc, getDemandDetailDoc, getProfileDoc, getSearchResultDoc, insertLikeDoc, updateProfileDoc, viewsCountUpDoc } from "../Document/Document";
 import { DebounceExecuteProps, ideaIdProps, updateProfileProps } from "../Type/type";
 import { SearchWordProps } from './../Type/type';
 
@@ -99,5 +99,17 @@ export const useLike = () => {
     return {
         handleInsertLike: handleInsertLike,
         handleDeleteLike: handleDeleteLike
+    }
+}
+
+export const useViewsCountUp = () => {
+    const [viewsCountUp] = useMutation(viewsCountUpDoc)
+    const handleViewsCountUp = async(id: string) => {
+        const result = await viewsCountUp({variables: {ideaID: id}})
+        return result.data
+    }
+
+    return {
+        handleViewsCountUp: handleViewsCountUp
     }
 }

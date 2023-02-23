@@ -1,11 +1,14 @@
+import { useMutation } from "@apollo/client";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ViewKanbanIcon from "@mui/icons-material/ViewKanban";
 import { Box, Paper, Stack, Typography } from "@mui/material";
-import { useDemandDetail } from "../../Hooks/hooks";
+import { useEffect } from "react";
+import { useDemandDetail, useViewsCountUp } from "../../Hooks/hooks";
 import Comments from "../Comment/Comments";
 import { Date } from "../Format/Date";
 export default function DemandDetail() {
     const { demandDetail, isLoading } = useDemandDetail();
+    console.log(demandDetail)
     if (isLoading || demandDetail == undefined) {
         return <></>;
     }
@@ -48,7 +51,7 @@ export default function DemandDetail() {
                                 <Stack direction="row">
                                     <ViewKanbanIcon fontSize="small" />
                                     <Typography>
-                                        {demandDetail.viewNumber}
+                                        {demandDetail.views}
                                     </Typography>
                                 </Stack>
                             </Box>
@@ -56,11 +59,11 @@ export default function DemandDetail() {
                                 <Stack direction="row">
                                     <ThumbUpIcon fontSize="small" />
                                     <Typography>
-                                        {demandDetail.goodNumber}
+                                        {demandDetail.likes.length}
                                     </Typography>
                                 </Stack>
                             </Box>
-                            <Date dateString={demandDetail.createdAt} />
+                            <Date dateString={demandDetail.created_at} />
                         </Stack>
                     </Stack>
                 </Paper>

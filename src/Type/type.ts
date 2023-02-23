@@ -2,7 +2,7 @@ export type LayoutProps = {
     children: React.ReactNode;
 };
 export type DemandRowType = {
-    createdAt: string;
+    created_at: string;
     caption: string;
     author: string;
     goodNumber: string;
@@ -17,7 +17,7 @@ export type DemandRowType = {
     }[]
 };
 export type CommentRowType = {
-    createdAt:string,
+    created_at:string,
     author: { name:string},
     caption:string,
 }
