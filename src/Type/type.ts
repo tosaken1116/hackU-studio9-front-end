@@ -10,6 +10,11 @@ export type DemandRowType = {
     views: string;
     id:string
     status: "inProgress" | "resolved" | "unResolved" | String;
+    likes: {
+        user: {
+            email: string
+        }
+    }[]
 };
 export type CommentRowType = {
     createdAt:string,
