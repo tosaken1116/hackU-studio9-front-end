@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { deleteLikeDoc, getCommentDoc, getDemandDetailDoc, getProfileDoc, getSearchResultDoc, insertLikeDoc, updateProfileDoc, viewsCountUpDoc } from "../Document/Document";
-import { DebounceExecuteProps, ideaIdProps, updateProfileProps } from "../Type/type";
+import { DebounceExecuteProps, FilterProps, ideaIdProps, updateProfileProps } from "../Type/type";
 import { SearchWordProps } from './../Type/type';
 
 export const useDemandDetail =()=> {
@@ -22,13 +22,15 @@ export const useDemandDetailQuery = () => {
 export const useSearch = () => {
     const router = useRouter();
     const searchWord = String(router.query.searchWord);
-    const { debouncedKeyword } = useDebounceSearch({
+        const { debouncedKeyword } = useDebounceSearch({
         keyword: searchWord,
         timeOutMillSec: 1000,
-    });
+        });
 
+    const status =!router.query.status? ["inProgress","resolved","unResolved"]:Array.isArray(router.query.status) ? router.query.status : [router.query.status]
+    const orderBy = { [String(router.query.sort)]: router.query.order }
     const { data } = useQuery(getSearchResultDoc, {
-        variables: { searchWord: debouncedKeyword!=""?`%${debouncedKeyword}%`:"" },
+        variables: { searchWord: debouncedKeyword!=""?`%${debouncedKeyword}%`:"" ,status:status.length==0?["inProgress","resolved","unResolved"]:status,order_by:orderBy},
     });
     return {
         Idea: data?.ideas,
@@ -104,12 +106,27 @@ export const useLike = () => {
 
 export const useViewsCountUp = () => {
     const [viewsCountUp] = useMutation(viewsCountUpDoc)
-    const handleViewsCountUp = async(id: string) => {
-        const result = await viewsCountUp({variables: {ideaID: id}})
+    const handleViewsCountUp = async (id: string) => {
+        const result = await viewsCountUp({ variables: { ideaID: id } })
         return result.data
     }
 
     return {
         handleViewsCountUp: handleViewsCountUp
     }
+}
+export const useFilterProps = () => {
+    const router = useRouter();
+
+    const setSearchParams = (filterProps: FilterProps) => {
+        router.replace({
+            query: {...router.query,...filterProps} as string,
+        });
+    };
+
+    return {
+        query:router.query,
+        isReady: router.isReady,
+        setSearchParams: setSearchParams,
+    };
 }
