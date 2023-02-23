@@ -8,14 +8,14 @@ export type DemandRowType = {
     goodNumber: string;
     title: string;
     views: string;
-    id:string
+    id: string;
     status: "inProgress" | "resolved" | "unResolved" | String;
 };
 export type CommentRowType = {
-    createdAt:string,
-    author: { name:string},
-    caption:string,
-}
+    createdAt: string;
+    author: { name: string };
+    caption: string;
+};
 
 export type DemandDetailModalProps = {
     isModalOpen: boolean;
@@ -26,27 +26,32 @@ export type PopOverProps = {
     anchorElement: HTMLButtonElement | null;
 };
 export type DemandsType = {
-    maxHeight: string
-    demands: DemandRowType[]
-    openModal:()=>void
-}
+    maxHeight: string;
+    demands: DemandRowType[];
+    openModal: () => void;
+};
 export type ideaIdProps = {
-    ideaId: string
-}
+    ideaId: string;
+};
 export type SearchWordProps = {
     searchWord: string;
 };
 export type SearchResultProps = {
-    openModal:()=>void
-}
+    openModal: () => void;
+};
 export type updateProfileProps = {
-    description: string
-    isEmailPublic:boolean
-}
+    description: string;
+    isEmailPublic: boolean;
+};
 export type TimeProps = {
-    dateString:string
-}
+    dateString: string;
+};
 export type DebounceExecuteProps = {
     keyword: string;
     timeOutMillSec: number;
+};
+export type MessageUserRowProps = {
+    imageUrl: string;
+    userName: string;
+    messagedAt: string;
 };
