@@ -120,7 +120,7 @@ export const useFilterProps = () => {
 
     const setSearchParams = (filterProps: FilterProps) => {
         router.replace({
-            query: {...router.query,...filterProps},
+            query: {...router.query,...filterProps} as string,
         });
     };
 
