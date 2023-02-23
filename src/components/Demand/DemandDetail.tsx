@@ -9,7 +9,6 @@ import { Date } from "../Format/Date";
 import Status from "../Status/Status";
 export default function DemandDetail() {
     const { demandDetail, isLoading } = useDemandDetail();
-    console.log(demandDetail)
     if (isLoading || demandDetail == undefined) {
         return <></>;
     }

@@ -37,8 +37,8 @@ query getDemandDetail($ideaId: uuid!){
 }`
 
 export const getSearchResultDoc = gql`
-query getSearchResult($searchWord: String!) {
-  ideas(where: {title: {_like: $searchWord}}) {
+query getSearchResult($searchWord: String!, $status: [status_enum!]!, $order_by: [ideas_order_by!] = {}) {
+  ideas(where: {status: {_in: $status}, title: {_like: $searchWord}}, order_by: $order_by) {
     views
     updated_at
     title
@@ -52,7 +52,8 @@ query getSearchResult($searchWord: String!) {
       }
     }
   }
-  }
+}
+
 `
 export const getCommentDoc = gql`
 query getComment($ideaId: uuid!)
