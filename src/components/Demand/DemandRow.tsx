@@ -4,7 +4,7 @@ import { Box, Button, IconButton, Typography, Checkbox } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { useDemandDetailQuery, useLike } from "../../Hooks/hooks";
+import { useDemandDetailQuery, useLike, useViewsCountUp } from "../../Hooks/hooks";
 import { DemandRowType, DemandsType } from "../../Type/type";
 import { Date } from "../Format/Date";
 import ProfilePopOver from "../Profile/ProfilePopOver";
@@ -27,8 +27,10 @@ export default function DemandRow({
     const [isLiked, setIsLiked] = useState<boolean>(likes.some(u => (
         u.user.email == session?.user?.email
     )))
+    const [viewsCount, setViewsCount] = useState<number>(Number(views))
     const [likesLength, setLikesLength] = useState<number>(likes.length)
     const { isReady, setDemandDetailQuery } = useDemandDetailQuery();
+    const {handleViewsCountUp} = useViewsCountUp()
     const {handleInsertLike, handleDeleteLike} = useLike()
     const handleOpenProfilePopOver = (
         event: React.MouseEvent<HTMLButtonElement>
@@ -53,6 +55,8 @@ export default function DemandRow({
                     onClick={() => {
                         openModal();
                         setDemandDetailQuery({ ideaId: id });
+                        handleViewsCountUp(id)
+                        setViewsCount(viewsCount+1)
                     }}
                 >
                     <Typography variant="h5">{title}</Typography>
@@ -92,7 +96,7 @@ export default function DemandRow({
                 </Stack>
                 <Stack direction="row">
                     <ViewKanbanIcon fontSize="small" />
-                    <Typography>{views}</Typography>
+                    <Typography>{viewsCount}</Typography>
                 </Stack>
                 <Date dateString={createdAt} />
             </Stack>

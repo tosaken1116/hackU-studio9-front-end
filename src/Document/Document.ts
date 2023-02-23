@@ -21,6 +21,7 @@ export const getHomeDemandsDoc = gql`
 export const getDemandDetailDoc = gql`
 query getDemandDetail($ideaId: uuid!){
   ideas(where: {id: {_eq: $ideaId}}) {
+    id
     author
     caption
     createdAt
@@ -107,4 +108,15 @@ mutation deleteLike($userEmail: String!, $ideaID: uuid!) {
     userEmail
   }
 }
+`
+
+export const viewsCountUpDoc = gql`
+mutation viewsCountUp($ideaID: uuid!) {
+  update_ideas(where: {id: {_eq: $ideaID}}, _inc: {views: 1}) {
+    returning {
+      views
+    }
+  }
+}
+
 `
