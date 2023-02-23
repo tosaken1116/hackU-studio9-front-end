@@ -55,3 +55,9 @@ export type MessageUserRowProps = {
     userName: string;
     messagedAt: string;
 };
+export type resolvedType = Array<"inProgress" | "resolved" | "unResolved">;
+export type FilterProps = {
+    sort?: "createdAt" | "name" | "views" | String;
+    order?: "asc" | "desc" | String;
+    status?: resolvedType;
+};
