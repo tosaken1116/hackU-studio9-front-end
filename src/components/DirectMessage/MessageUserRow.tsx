@@ -9,7 +9,7 @@ export default function MessageUserRow({
     messagedAt,
 }: MessageUserRowProps) {
     return (
-        <Button>
+        <Button variant="outlined">
             <Stack>
                 <Stack direction="row">
                     <Image

@@ -1,3 +1,4 @@
+import SendIcon from "@mui/icons-material/Send";
 import { Box, Button, TextField, useMediaQuery } from "@mui/material";
 import { Stack } from "@mui/system";
 import React, { useState } from "react";
@@ -67,8 +68,18 @@ function PersonalMessage() {
             <Box>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     {/* <TextField type="text" onChange={(e:React.ChangeEvent<HTMLInputElement>) => handleChange(e)}></TextField> */}
-                    <TextField type="text" value={InputValue}></TextField>
-                    <Button type="submit">送信</Button>
+                    <TextField
+                        type="text"
+                        value={InputValue}
+                        label="メッセージを入力しなさ"
+                    ></TextField>
+                    <Button
+                        variant="contained"
+                        style={{ height: "60px" }}
+                        endIcon={<SendIcon />}
+                    >
+                        送信
+                    </Button>
                 </form>
             </Box>
         </Stack>
