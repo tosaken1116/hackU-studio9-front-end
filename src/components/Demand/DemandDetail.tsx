@@ -63,7 +63,7 @@ export default function DemandDetail() {
                                     </Typography>
                                 </Stack>
                             </Box>
-                            <Date dateString={demandDetail.createdAt} />
+                            <Date dateString={demandDetail.created_at} />
                         </Stack>
                     </Stack>
                 </Paper>

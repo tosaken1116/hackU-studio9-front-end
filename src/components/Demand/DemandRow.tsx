@@ -11,7 +11,7 @@ import ProfilePopOver from "../Profile/ProfilePopOver";
 import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
 
 export default function DemandRow({
-    createdAt,
+    created_at,
     author,
     goodNumber,
     title,
@@ -98,7 +98,7 @@ export default function DemandRow({
                     <ViewKanbanIcon fontSize="small" />
                     <Typography>{viewsCount}</Typography>
                 </Stack>
-                <Date dateString={createdAt} />
+                <Date dateString={created_at} />
             </Stack>
         </Stack>
     );

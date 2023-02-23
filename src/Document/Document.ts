@@ -6,7 +6,7 @@ export const getHomeDemandsDoc = gql`
             author
             title
             status
-            createdAt
+            created_at
             views
             id
             likes {
@@ -24,7 +24,7 @@ query getDemandDetail($ideaId: uuid!){
     id
     author
     caption
-    createdAt
+    created_at
     title
     status
     views
@@ -40,11 +40,11 @@ export const getSearchResultDoc = gql`
 query getSearchResult($searchWord: String!) {
   ideas(where: {title: {_like: $searchWord}}) {
     views
-    updatedAt
+    updated_at
     title
     status
     id
-    createdAt
+    created_at
     author
     likes {
       user {
@@ -61,7 +61,7 @@ query getComment($ideaId: uuid!)
     author:user {
       name
     }
-    createdAt
+    created_at
     caption
   }
   }
