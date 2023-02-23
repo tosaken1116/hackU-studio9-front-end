@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useDemandDetail, useViewsCountUp } from "../../Hooks/hooks";
 import Comments from "../Comment/Comments";
 import { Date } from "../Format/Date";
+import Status from "../Status/Status";
 export default function DemandDetail() {
     const { demandDetail, isLoading } = useDemandDetail();
     console.log(demandDetail)
@@ -34,19 +35,7 @@ export default function DemandDetail() {
                             {demandDetail.caption}
                         </Typography>
                         <Stack direction="row" spacing={2}>
-                            <Box>
-                                <Typography
-                                    sx={{
-                                        color: demandDetail.isResolved
-                                            ? "green"
-                                            : "red",
-                                    }}
-                                >
-                                    {demandDetail.isResolved
-                                        ? "解決済"
-                                        : "未解決"}
-                                </Typography>
-                            </Box>
+                            <Status status={demandDetail.status} />
                             <Box>
                                 <Stack direction="row">
                                     <ViewKanbanIcon fontSize="small" />
